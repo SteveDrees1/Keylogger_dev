@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/db/keylogger_db_create.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/db/keylogger_table_create.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/decoding_example.py" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/keylogger.py" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/logger.py" dialect="GenericSQL" />
   </component>
