@@ -23,6 +23,8 @@ This project is a Python-based keylogger that captures keystrokes, encodes them 
     - [4. Binary Conversion](#4-binary-conversion)
     - [5. Multiplication and Storage](#5-multiplication-and-storage)
   - [License](#license)
+  - [Authors](#Authors)
+  - [For Educational Purposes](#For Educational Purposes)
 
 ## Features
 
@@ -128,8 +130,73 @@ The Base64-encoded key and salt are converted to a binary integer. This integer 
 5. Multiplication and Storage
 The binary integer is multiplied by 24 for added complexity and then stored in the MySQL database.
 
-##License
+## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
+### Authors
+Steve Drees, and Victor Cabieles
 
-###Authors: Steve Drees, and Victor Cabieles
+## For Educational Purposes
+ 1. Run the keylogger as a background process
+ - Windows:
+Run the script using Python and redirect the output to null to avoid displaying anything in the terminal:
+
+ ```bash
+python keylogger.py >nul 2>&1
+ ```
+
+ON macOS/Linux:
+
+```bash
+nohup python3 keylogger.py >/dev/null 2>&1 &
+```
+
+2. Hide the Script File
+Change the file attributes:
+   - On Windows, you can make the file hidden:
+
+```bash
+attrib +h keylogger.py
+```
+
+On macOS/Linux, you can prepend a dot to the filename to hide it:
+
+```bash
+mv keylogger.py .keylogger.py
+```
+
+3. Use Startup Scripts (With Caution)
+You can configure the script to run automatically when the computer starts.
+   However, this should only be done on your own devices where you have control and consent:
+
+On Windows:
+ - Add a shortcut to the script in the Startup folder:
+```bash
+shell:startup
+```
+
+On macOS: Use a launchd launch agent to run the script automatically on startup.
+
+4. Log Files
+Ensure that the keylogger's log files are stored in a secure, hidden directory.
+   For example, on macOS/Linux, you can store logs in a hidden directory:
+
+```bash
+mkdir ~/.logs
+```
+
+And then direct the keylogger to save logs there.
+
+## Risks and Legal Consequences
+Running a keylogger without proper consent, even on your own device,
+can expose you to legal risks if other users are affected.
+Unauthorized monitoring can violate privacy laws and lead to serious repercussions.
+
+## Conclusion
+If you're developing or testing a keylogger,
+it's critical to limit its use to environments where you have full ownership and control,
+and ensure that no other users are affected without their knowledge.
+Always prioritize ethical considerations and legal compliance in your work.
+If you need to monitor activity on a shared or public device,
+use transparent and legally approved methods such as parental control software or security monitoring tools
+that are designed for these purposes.
