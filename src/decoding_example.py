@@ -29,4 +29,3 @@ def retrieve_and_decode_key(key_to_find):
         finally:
             cursor.close()
             connection.close()
-
