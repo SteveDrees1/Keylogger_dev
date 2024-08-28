@@ -4,6 +4,7 @@ from decoder import decode_keylogger_result
 from db_connector import connect_to_db
 from mysql.connector import Error
 
+
 def retrieve_and_decode_key(key_to_find):
     connection = connect_to_db()
     if connection:
@@ -32,3 +33,7 @@ def retrieve_and_decode_key(key_to_find):
             cursor.close()
             connection.close()
 
+# Example usage
+# Replace 'your_encoded_value' with the actual value from your database
+# encoded_value_to_find = 'your_encoded_value'
+# retrieve_and_decode_key(encoded_value_to_find)
