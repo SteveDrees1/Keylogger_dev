@@ -9,6 +9,8 @@ def retrieve_and_decode_key(key_to_find):
     if connection:
         cursor = connection.cursor()
         try:
+            print(f"Searching for key: {key_to_find}")  # Debugging print statement
+
             # Parameterized query to prevent SQL injection and ensure correct query syntax
             cursor.execute("SELECT key_pressed FROM keystrokes WHERE key_pressed = %s", (key_to_find,))
 
@@ -29,3 +31,4 @@ def retrieve_and_decode_key(key_to_find):
         finally:
             cursor.close()
             connection.close()
+

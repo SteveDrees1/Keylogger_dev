@@ -1,24 +1,22 @@
+# decoder.py
+
 import base64
 
-def decode_keylogger_result(encoded_value, salt_length_in_bytes=8):
-    # Ensure encoded_value is a valid integer string
+
+def decode_keylogger_result(encoded_value):
     try:
-        original_value = int(encoded_value) // 24  # Ensure `encoded_value` is numeric
-    except ValueError as e:
-        print(f"Error converting encoded value: {e}")
-        return None, None
+        # Split the encoded value into the sentence and salt (if present)
+        sentence_base64, salt_base64 = encoded_value.split(":")
 
-    # The rest of your decoding logic
-    salt_length_in_bits = salt_length_in_bytes * 8
-    key_binary = original_value >> salt_length_in_bits
-    salt = original_value & ((1 << salt_length_in_bits) - 1)
+        # Decode the Base64 string back to the original sentence
+        sentence_bytes = base64.b64decode(sentence_base64)
+        original_sentence = sentence_bytes.decode('utf-8')
 
-    # Convert the binary data back to Base64 string
-    key_base64_bytes = key_binary.to_bytes((key_binary.bit_length() + 7) // 8, 'big')
-    key_base64 = key_base64_bytes.decode('utf-8')
-
-    # Decode the Base64 string to the original key
-    original_key_bytes = base64.b64decode(key_base64)
-    original_key = original_key_bytes.decode('utf-8')
-
-    return original_key, salt
+        # Decode the salt for debugging or verification
+        salt = base64.b64decode(salt_base64)
+        return original_sentence, salt
+    except ValueError:
+        # Handle cases where there is no salt
+        sentence_bytes = base64.b64decode(encoded_value)
+        original_sentence = sentence_bytes.decode('utf-8')
+        return original_sentence, None

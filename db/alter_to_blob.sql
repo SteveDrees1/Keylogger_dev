@@ -1,0 +1,1 @@
+ALTER TABLE keystrokes MODIFY COLUMN key_pressed TEXT;
